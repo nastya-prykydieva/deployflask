@@ -17,7 +17,7 @@ class Config(object):
 class DevConfig(Config):
     DEBUG = True
     DEVELOPMENT = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+    SQLALCHEMY_DATABASE_URI = "postgres://db_ez1h_user:E3MUwcuyxlK8eioxTwB0GnrW3LGbKRRC@dpg-cmk80qev3ddc738q9tlg-a.frankfurt-postgres.render.com/db_ez1h"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 
