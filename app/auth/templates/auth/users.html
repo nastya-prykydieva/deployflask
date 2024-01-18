@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Users{% endblock %}
+{% from "render_field.html" import render_field %}
+{% block content %}
+<div class="container py-5" style="max-width: 1000px; margin: auto;">
+    <div class="row d-flex justify-content-center h-100">
+        <div class="col col-lg-9 col-xl-7">
+            <div class="card rounded-3">
+                <div class="bg-dark-subtle card-body p-4">
+                    <h4 class="text-center my-3 pb-3">Users</h4>
+                    <table class="table mb-5">
+                        <thead>
+                        <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Email</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% if all_users %}
+                        {% for user in all_users %}
+                        <tr>
+                            <th scope="row">{{ user.id }}</th>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        {% endfor %}
+                        <tr>
+                            <td colspan="4">Total: {{all_users|length}}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="4" class="text-center">There are no registered users.</td>
+                        </tr>
+                        {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

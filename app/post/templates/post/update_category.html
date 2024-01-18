@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Update{% endblock %}
+{% from "render_field.html" import render_field %}
+{% block content %}
+<div class="container py-5 h-100">
+    <a href="{{url_for('post_bp.list_category')}}" class="btn btn-secondary">Categories</a>
+    <a href="{{ url_for('post_bp.list_tag')}}" class="btn btn-secondary">Tags</a>
+    <div class="row d-flex justify-content-center align-items-left h-100">
+        <div class="col col-lg-9 col-xl-7">
+            <div class="card rounded-3">
+                <div class="bg-dark-subtle card-body p-4">
+                    <h4 class="text-center my-3 pb-3">Update Category</h4>
+                    <form method="post" action="{{url_for('post_bp.update_category', id=category.id)}}" class="mb-5 text-center" novalidate>
+                        {{ form.csrf_token }}
+                        {{ render_field(form.name) }}
+                        {{ form.submit(class="btn btn-primary btn-lg btn-block") }}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

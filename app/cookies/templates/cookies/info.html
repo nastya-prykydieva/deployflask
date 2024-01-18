@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}Info{% endblock %}
+{% from "render_field.html" import render_field %}
+{% block content %}
+<h2 class="fs-1 mt-5 text-center">Hello, {{username}}!</h2>
+<div class="p-2 mt-4 text-center">
+    <p>You've logged in.</p>
+    <p>Welcome back to the site!</p>
+</div>
+
+{% if done %}<p>{{ done }}</p>{% endif %}
+
+<div class="bg-dark-subtle p-5 mt-5 mb-5 text-center">
+    <form action={{url_for('cookies.add_cookie')}} method="post">
+        <label for="key">Key:</label>
+        <input type="text" name="key" id="key">
+        <label for="value">Value:</label>
+        <input type="text" name="value" id="value">
+        <label for="max_age">Max age (sec):</label>
+        <input type="number" name="max_age" id="max_age"><br><br>
+        <button type="submit" class="btn btn-primary btn-lg">Add Cookie</button>
+    </form>
+</div>
+
+<div class="bg-dark-subtle p-5 mt-5 mb-5 text-center">
+    <form action={{url_for('cookies.remove_cookie')}} method="post">
+        <label for="key">Key to delete:</label>
+        <input type="text" name="key" id="delete_key"><br><br>
+        <button type="submit" class="btn btn-primary btn-lg">Delete Cookie</button>
+    </form><br>
+
+    <form action={{url_for('cookies.remove_all_cookies')}} method="post">
+        <button type="submit" class="btn btn-primary btn-lg">Delete All</button>
+    </form>
+</div>
+
+{% if cookies %}
+<table class="text-center">
+    <tr>
+        <th>Key</th>
+        <th>Value</th>
+    </tr>
+    {% for key, value in cookies.items() %}
+    <tr>
+        <td>{{ key }}</td>
+        <td>{{ value }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+<div class="bg-dark-subtle p-5 mt-5 mb-5 text-center">
+    <form action={{url_for("cookies.change_password")}} method="post" class="bg-dark-subtle text-center" novalidate>
+        {{form.csrf_token}}
+        {{render_field(form.old_password)}}
+        {{render_field(form.new_password)}}
+        {{render_field(form.confirm_password)}}
+        {{form.submit(class="btn btn-primary btn-lg")}}
+    </form>
+</div>
+{% endblock %}

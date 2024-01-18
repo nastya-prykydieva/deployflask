@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Account{% endblock %}
+{% from "render_field.html" import render_field %}
+{% block content %}
+<div class="content-section" style="max-width: 450px; margin: auto;">
+    <div class="media mt-4" style="display: flex; align-items: center;">
+        <img class="rounded-circle account-img ms-5 mx-2" src="{{ image_file }}" height="125px" width="125px">
+        <div class="media-body" style="margin-left: 10px;">
+            <h2 class="account-heading">{{ current_user.username }}</h2>
+            <p class="text-secondary">{{ current_user.email }}</p>
+            <p class="text-secondary">Last seen: {{ current_user.last_seen.strftime('%d-%m-%Y (%H:%M)') }}</p>
+        </div>
+    </div>
+    <div class="content-section">
+        <h4 class="mt-4 text-center">Account Info</h4>
+        <form action={{url_for("auth.account")}} method="post" enctype="multipart/form-data" novalidate>
+            {{ form.csrf_token }}
+            {{ render_field(form.username, class="form-control") }}
+            {{ render_field(form.email, class="form-control") }}
+            {{ render_field(form.about_me, class="form-control") }}
+            {{ render_field(form.picture, class="form-control") }}
+            {{ form.submit(class="btn btn-primary btn-lg bg-dark") }}
+            <a href="{{ url_for('auth.reset_password') }}" class="btn btn-primary btn-lg bg-dark">Change Password</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

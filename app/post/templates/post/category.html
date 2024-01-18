@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Category{% endblock %}
+{% from "render_field.html" import render_field %}
+{%block content%}
+<div class="container py-5 h-100">
+    <a href="{{url_for('post_bp.list_tag')}}" class="btn btn-secondary">Tags</a>
+    <div class="row d-flex justify-content-center align-items-left h-100">
+        <div class="col col-lg-9 col-xl-7">
+            <div class="card rounded-3">
+                <div class="bg-dark-subtle card-body p-4">
+                    <h5 class="text-center my-3 pb-3">Categories</h5>
+                    <form method="post" action="{{url_for('post_bp.create_category')}}" class="mb-5 text-center" novalidate>
+                        {{ form.csrf_token }}
+                        {{ render_field(form.name) }}
+                        {{ form.submit(class="btn btn-primary btn-lg btn-block") }}
+                    </form>
+
+                    <table class="table mb-4">
+                        <thead>
+                        <tr>
+                            <th scope="col">No.</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for category in category_list %}
+                        <tr>
+                            <th scope="row">{{ category.id }}</th>
+                            <td>{{ category.name }}</td>
+                            <td>
+                                <a href="{{url_for('post_bp.update_category', id=category.id)}}"
+                                   class="btn btn-info">Edit</a>
+                                <a href="{{url_for('post_bp.delete_category', id=category.id)}}"
+                                   class="btn btn-danger ms-1"
+                                   onclick="return confirm('Are you sure you want to delete this category?')">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

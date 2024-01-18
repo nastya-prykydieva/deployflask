@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Update{% endblock %}
+{% from "render_field.html" import render_field %}
+{% block content %}
+<br><a href="{{url_for('post_bp.list_category')}}" class="btn btn-secondary">Categories</a>
+<a href="{{url_for('post_bp.list_tag')}}" class="btn btn-secondary">Tags</a>
+<h2 class="fs-1 mt-5 text-center">Update Post</h2>
+<form action={{url_for('post_bp.update', id=post.id)}} method="post" class="bg-dark-subtle p-5 mt-5 mb-5 text-center"
+      enctype="multipart/form-data" novalidate>
+    {{ form.csrf_token }}
+    {{ render_field(form.title) }}
+    {{ render_field(form.text) }}
+    {{ render_field(form.image) }}
+    {{ render_field(form.type) }}
+    {{ render_field(form.category) }}
+    {{ render_field(form.tags) }}
+    <b>Enabled: </b>{{ form.enabled }}<br><br>
+    {{ form.submit(class="btn btn-primary btn-lg bg-dark center") }}
+</form>
+{% endblock %}

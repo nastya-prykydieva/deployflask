@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}{{ skill }}{% endblock %}
+{% block content %}
+    <div class="card mb-3 text-center mt-5 bg-dark-subtle">
+        <img class="card-img-top" src="{{url_for('static', filename='images/{}.png'.format(num))}}"
+            style="width: 5rem; align-self: center;">
+        <h3 class="card-title">{{ skill }}</h3>
+    </div>
+{% endblock %}

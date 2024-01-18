@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Skills{% endblock %}
+{% block content %}
+    <h2 class="fs-1 mt-5 text-center">Skills</h2>
+    <div class="card-group">
+        {% for skill in skills %}
+            <div class="card mb-3 text-center bg-dark-subtle">
+                <img class="card-img-top" src="{{url_for('static', filename='images/{}.png'.format(loop.index))}}"
+                     style="width: 5rem; align-self: center;">
+                <h3 class="card-title">
+                    <a class="text-dark text-decoration-none" href="{{ '{}/{}'.format(url_for('portfolio.skills_page'), loop.index-1) }}">{{ skill }}</a>
+                </h3>
+            </div>
+        {% endfor %}
+    </div>
+    <p>There are {{ skills|length }} skills.</p>
+{% endblock %}

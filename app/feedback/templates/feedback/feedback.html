@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Feedback{% endblock %}
+{% from "render_field.html" import render_field %}
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-9 col-xl-7">
+            <div class="card rounded-3">
+                <div class="bg-dark-subtle card-body p-4">
+
+                    <h4 class="text-center my-3 pb-3">Feedbacks</h4>
+                    <form method="post" action="{{ url_for('feedback_bp.feedback') }}" class="mb-5 text-center" novalidate>
+                        {{ form.csrf_token }}
+                        {{ render_field(form.username) }}
+                        {{ render_field(form.text) }}
+                        {{ form.submit(class="btn btn-primary btn-lg btn-block") }}
+                    </form>
+
+                    <div class="container mt-5">
+                        {% for feedback in feedbacks %}
+                            <div class="card mb-5 mx-auto" style="max-width: 600px;">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ feedback.username }}</h5>
+                                    <p class="card-text"><strong>Text:</strong> {{ feedback.text }}</p>
+                                    <p class="card-text"><strong>Date:</strong> {{ feedback.date.strftime('%d-%m-%Y (%H:%M)') }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

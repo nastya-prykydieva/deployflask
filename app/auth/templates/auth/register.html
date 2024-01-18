@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% from "render_field.html" import render_field %}
+{% block content %}
+<h2 class="fs-1 mt-5 text-center">Register</h2>
+<form action={{url_for("auth.register")}} method="post" class="bg-dark-subtle p-5 mt-5 mb-5 text-center" novalidate>
+    {{ form.csrf_token }}
+    {{ render_field(form.username) }}
+    {{ render_field(form.email) }}
+    {{ render_field(form.password) }}
+    {{ render_field(form.confirm_password) }}
+    {{ form.submit(class="btn btn-primary btn-lg bg-dark center") }}
+</form>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}IPZ{% endblock %}
+{% block content %}
+    <h2 class="fs-1 mt-5 text-center">Software Engineering</h2>
+    <div class="row">
+        <div class="col-6">
+            <div class="bg-dark-subtle p-5 mt-5 mb-5">
+                <h3>Vasyl Stefanyk Precarpathian National University</h3>
+                <p>My university provides high-quality training from scratch.
+                In order to engage students and broaden their horizons, the university regularly offers classes
+                in programming, web design, computer graphics, and organizes visits to specialized computer companies.
+                Vasyl Stefanyk Precarpathian National University is dedicated to providing a comprehensive education
+                that not only equips students with technical skills but also empowers them to think creatively and
+                adapt to the ever-evolving world of technology. This commitment to excellence ensures that
+                graduates are well-prepared to thrive in their chosen fields and contribute to the advancement of the
+                industry.
+            </p>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="p-5 mt-5 mb-5">
+            <img src="{{ url_for('static', filename='images/foto3.png') }}" width="300" alt="foto">
+            </div>
+        </div>
+    </div>
+{% endblock %}

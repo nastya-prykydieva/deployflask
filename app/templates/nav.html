@@ -1,0 +1,43 @@
+{% set menu = {"About": url_for('portfolio.about'),
+            "IPZ": url_for('portfolio.ipz'), "Skills": url_for('portfolio.skills_page'),
+            "Contact": url_for('portfolio.contact'), "To Do": url_for('todo_bp.todo'),
+            "Feedback": url_for('feedback_bp.feedback'), "Users": url_for('auth.users'),
+            "Info": url_for('cookies.info'), "Posts": url_for('post_bp.list_post')} %}
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><img src="{{ url_for('static', filename='images/foto1.jpg') }}" alt="logo"
+                                              width="80"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                {% for name, url in menu.items() %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url}}">{{name}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                {% if current_user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('auth.account')}}">Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('auth.logout')}}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('auth.register')}}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('auth.login')}}">Login</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

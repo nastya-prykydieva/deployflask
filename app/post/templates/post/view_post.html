@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Post{% endblock %}
+{% from "render_field.html" import render_field %}
+{% block content %}
+<style>
+    .custom-tag {
+        background-color: #7B68EE;
+        color: #fff;
+        padding: 0.2em 0.5em;
+        margin-right: 0.5em;
+        border-radius: 5px;
+    }
+</style>
+<br><a href="{{url_for('post_bp.list_category')}}" class="btn btn-secondary">Categories</a>
+<a href="{{url_for('post_bp.list_tag')}}" class="btn btn-secondary">Tags</a>
+<div class="card mt-5 mx-auto col-md-6">
+    <div class="card-body">
+    {% if post is defined %}
+        <h5 class="card-title">{{ post.title }}</h5>
+        <p class="card-text"><small>{{ post.created.strftime('%d-%m-%Y (%H:%M)') }}</small></p>
+        <p class="card-text">Type:
+            <span class="custom-tag">{{ post.type.name }}</span>
+        </p>
+        <p><img src="{{ url_for('static', filename='post_pics/' + post.image) }}"
+                class="card-img-top" alt="{{ post.title }}" height="400px" width="400px"></p>
+        <p class="card-text">{{ post.text }}</p>
+        <p class="card-text">Category:
+            <span class="custom-tag">{{ post.category.name }}</span>
+        </p>
+        <p class="card-text">Tags:
+        {% for tag in post.tags %}
+            <span class="custom-tag">{{ tag.name }}</span>
+        {% endfor %}</p>
+        <p class="card-text">Enabled: {% if post.enabled %}Yes{% else %}No{% endif %}</p>
+        {% if current_user.id == post.user_id %}
+        <a href="{{url_for('post_bp.update', id=post.id) }}" class="btn btn-info">Edit</a>
+        <a href="{{url_for('post_bp.delete', id=post.id) }}" class="btn btn-danger"
+           onclick="return confirm('Are you sure you want to delete this post?')">Delete</a>
+        {% endif %}
+    {% else %}
+        <p class="info">This post is not found.</p>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}
