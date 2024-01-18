@@ -20,7 +20,6 @@ ma = Marshmallow()
 def create_app(config_name='dev'):
     app = Flask(__name__)
     app.config.from_object(config.get(config_name))
-    # postgres://db_ez1h_user:E3MUwcuyxlK8eioxTwB0GnrW3LGbKRRC@dpg-cmk80qev3ddc738q9tlg-a.frankfurt-postgres.render.com/db_ez1h
 
     db.init_app(app)
     migrate.init_app(app, db, render_as_batch=True)
